@@ -58,11 +58,7 @@ where
         }
         bytes += c as u64;
     }
-    Out {
-        bytes,
-        lines,
-        words,
-    }
+    Out::new((bytes, lines, words))
 }
 
 #[cfg(test)]

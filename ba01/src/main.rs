@@ -37,6 +37,7 @@ mod tests {
             (&b"abcd\r"[..], 5),
             (&b"abcd/r"[..], 6),
             (&big_input, 1 << 20),
+            ("🦀".as_bytes(), 4),
         ];
         for (input, output) in cases {
             assert_eq!(get_bytes_count(input), output)
@@ -48,7 +49,7 @@ mod tests {
     fn panic_on_read() {
         struct DummyReader;
         impl Read for DummyReader {
-            fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
+            fn read(&mut self, _buf: &mut [u8]) -> std::io::Result<usize> {
                 Err(std::io::Error::other("Ошибка!"))
             }
         }

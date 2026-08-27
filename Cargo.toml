@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["ba00", "ba01"]
+members = ["ba00", "ba01", "ba02"]
 
 [workspace.package]
 edition = "2024"

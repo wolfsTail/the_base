@@ -1,14 +1,4 @@
 pub fn parse_bitmap_8x8(lines: [&str; 8]) -> [u8; 8] {
-    _parse_bitmap_8x8(lines)
-}
-pub fn render_bitmap_8x8(bytes: [u8; 8]) -> [String; 8] {
-    _render_bitmap_8x8(bytes)
-}
-pub fn invert_bitmap_8x8(bytes: [u8; 8]) -> [u8; 8] {
-    bytes.map(|x| !x)
-}
-
-fn _parse_bitmap_8x8(lines: [&str; 8]) -> [u8; 8] {
     let mut out: [u8; 8] = [0; 8];
     for (i, line) in lines.iter().enumerate() {
         let mut b: u8 = 0b0000_0000;
@@ -27,7 +17,7 @@ fn _parse_bitmap_8x8(lines: [&str; 8]) -> [u8; 8] {
     out
 }
 
-fn _render_bitmap_8x8(bytes: [u8; 8]) -> [String; 8] {
+pub fn render_bitmap_8x8(bytes: [u8; 8]) -> [String; 8] {
     let mut out: [String; 8] = std::array::from_fn(|_| String::new());
     for (i, byte) in bytes.iter().enumerate() {
         let mut n: i32 = 7;
@@ -45,6 +35,10 @@ fn _render_bitmap_8x8(bytes: [u8; 8]) -> [String; 8] {
     out
 }
 
+pub fn invert_bitmap_8x8(bytes: [u8; 8]) -> [u8; 8] {
+    bytes.map(|x| !x)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -55,7 +49,7 @@ mod tests {
             "..####..", ".#....#.", "#.#..#.#", "#..##..#", "#......#", "#.#..#.#", ".#....#.",
             "#.......",
         ];
-        let bytes = _parse_bitmap_8x8(image);
+        let bytes = parse_bitmap_8x8(image);
         let expected = [
             0b0011_1100,
             0b0100_0010,
@@ -81,7 +75,7 @@ mod tests {
             0b0100_0010,
             0b1000_0000,
         ];
-        let image = _render_bitmap_8x8(bytes);
+        let image = render_bitmap_8x8(bytes);
         let expected = [
             "..####..", ".#....#.", "#.#..#.#", "#..##..#", "#......#", "#.#..#.#", ".#....#.",
             "#.......",

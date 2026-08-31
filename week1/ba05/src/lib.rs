@@ -18,21 +18,21 @@ pub fn parse_bitmap_8x8(lines: [&str; 8]) -> [u8; 8] {
 }
 
 pub fn render_bitmap_8x8(bytes: [u8; 8]) -> [String; 8] {
-    let mut out: [String; 8] = std::array::from_fn(|_| String::new());
-    for (i, byte) in bytes.iter().enumerate() {
-        let mut n: i32 = 7;
-        let mut tmp: String = String::new();
-        while n >= 0 {
-            if *byte & (1 << n) != 0 {
-                tmp.push('#');
-            } else {
-                tmp.push('.');
-            }
-            n -= 1;
+    bytes.map(render_byte_to_byte)
+}
+
+fn render_byte_to_byte(byte: u8) -> String {
+    let mut r: String = String::new();
+    let mut n: i32 = 7;
+    while n >= 0 {
+        if byte & (1 << n) != 0 {
+            r.push('#');
+        } else {
+            r.push('.');
         }
-        out[i] = tmp;
+        n -= 1;
     }
-    out
+    r
 }
 
 pub fn invert_bitmap_8x8(bytes: [u8; 8]) -> [u8; 8] {
@@ -81,5 +81,13 @@ mod tests {
             "#.......",
         ];
         assert_eq!(image, expected.map(|x: &str| x.to_string()));
+    }
+
+    #[test]
+    fn test_render_by_to_byte() {
+        let byte = 0b0011_1100;
+        let image = render_byte_to_byte(byte);
+        let expected = "..####..";
+        assert_eq!(image, expected);
     }
 }

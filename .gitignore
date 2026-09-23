@@ -1,4 +1,5 @@
 /*
+*.bin
 !/.gitignore
 !/Cargo.toml
 !/Cargo.lock

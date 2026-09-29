@@ -27,6 +27,10 @@ name = "ba05"
 version = "0.1.0"
 
 [[package]]
+name = "blazing_shell"
+version = "0.1.0"
+
+[[package]]
 name = "hw"
 version = "0.1.0"
 

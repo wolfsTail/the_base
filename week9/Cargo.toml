@@ -1,0 +1,6 @@
+[package]
+name = "week9"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
